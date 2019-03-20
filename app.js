@@ -7,25 +7,20 @@ let logger = require('morgan');
 let nunjucks = require('nunjucks');
 //路由
 let indexRouter = require('./routes/index');
-let usersRouter = require('./routes/about');
+let aboutRouter = require('./routes/about');
+let albumRouter = require('./routes/album');
+let detailsRouter = require('./routes/details');
+let leacotsRouter = require('./routes/leacots');
+let whisperRouter = require('./routes/whisper');
+let loginRouter = require('./routes/login');
+let registerRouter = require('./routes/register');
+let writeRouter = require('./routes/write');
 
 let app = express();
 
-// let mysql = require('mysql');
-//
-// let connect = mysql.createConnection({
-//   host:'127.0.0.1',
-//   user:'root',
-//   password:'root',
-//   database:'test'
-// })
-// connect.connect()
-// connect.query('SELECT * FROM node', function (error, results, fields) {
-//   if (error) throw error;
-//   console.log('The solution is: ', results);
-// });
 
-// connect.end();
+
+
 // view engine setup
 nunjucks.configure( path.join(__dirname, 'views'), {
   autoescape: true,
@@ -42,7 +37,14 @@ app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 //使用路由
 app.use('/', indexRouter);
-app.use('/about', usersRouter);
+app.use('/about', aboutRouter);
+app.use('/album', albumRouter);
+app.use('/details', detailsRouter);
+app.use('/leacots', leacotsRouter);
+app.use('/whisper', whisperRouter);
+app.use('/login', loginRouter);
+app.use('/register', registerRouter);
+app.use('/write', writeRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
